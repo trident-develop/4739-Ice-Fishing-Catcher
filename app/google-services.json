@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "915000762558",
+    "project_id": "ice-fishing-catcher-2f71d",
+    "storage_bucket": "ice-fishing-catcher-2f71d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915000762558:android:ec7d10a8ca9ee5bdc13eef",
+        "android_client_info": {
+          "package_name": "com.feelingtouch.r"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB_JLfXbNr3Fo6kzfSmq7jjc0mrDowHPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
