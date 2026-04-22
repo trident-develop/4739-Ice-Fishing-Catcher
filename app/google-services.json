@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:915000762558:android:ec7d10a8ca9ee5bdc13eef",
+        "mobilesdk_app_id": "1:915000762558:android:b153b2feafd82220c13eef",
         "android_client_info": {
-          "package_name": "com.feelingtouch.r"
+          "package_name": "kr.co.company.hwa"
         }
       },
       "oauth_client": [],

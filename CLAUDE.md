@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Ice Fishing Catcher is an Android mobile game built with Kotlin and Jetpack Compose. It is a portrait-orientation, single-player fishing game with 30 levels of increasing difficulty.
 
-- **Package:** `com.feelingtouch.r`
+- **Package:** `kr.co.company.hwa`
 - **Min SDK:** 24 (Android 7.0), **Target SDK:** 36
 - **Language:** Kotlin with Jetpack Compose UI
 - **Build System:** Gradle with Kotlin DSL and version catalog (`gradle/libs.versions.toml`)
