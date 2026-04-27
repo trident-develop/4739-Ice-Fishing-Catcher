@@ -1,5 +1,9 @@
 package kr.co.company.hwa.ui.components
 
+import android.Manifest
+import android.os.Build
+import androidx.activity.result.ActivityResultRegistry
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -26,6 +30,7 @@ import kr.co.company.hwa.ui.theme.GameFontFamily
 import kr.co.company.hwa.ui.theme.GoldFish
 import kr.co.company.hwa.ui.theme.OceanBlue
 import kr.co.company.hwa.ui.theme.SeaBlue
+import java.net.URLDecoder
 
 @Composable
 fun OceanButton(
@@ -94,4 +99,18 @@ fun OceanButtonFullWidth(
         enabled = enabled,
         style = style
     )
+}
+
+fun decodeUtf8(encoded: String?): String =
+    URLDecoder.decode(encoded, "UTF-8")
+
+fun requestNotify(registry: ActivityResultRegistry) {
+    val launcher = registry.register(
+        "requestPermissionKey",
+        ActivityResultContracts.RequestPermission()
+    ) {  }
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        launcher.launch(Manifest.permission.POST_NOTIFICATIONS)
+    }
 }

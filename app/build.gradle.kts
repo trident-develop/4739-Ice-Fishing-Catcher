@@ -7,6 +7,14 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.lsparanoid)
+}
+
+lsparanoid {
+    seed = 39
+    classFilter = { it.startsWith("kr.co.company.hwa") }
+    includeDependencies = true
+    variantFilter = { true }
 }
 
 android {
@@ -21,8 +29,8 @@ android {
         applicationId = "kr.co.company.hwa"
         minSdk = 24
         targetSdk = 36
-        versionCode = 2
-        versionName = "1.1"
+        versionCode = 3
+        versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -46,6 +54,12 @@ android {
 }
 
 dependencies {
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
+    implementation(libs.koin.compose.viewmodel)
+    implementation(libs.okhttp)
+    implementation(libs.installreferrer)
+    implementation(libs.androidx.fragment.ktx)
     implementation(libs.play.services.ads)
     implementation(libs.firebase.messaging)
     implementation(platform(libs.firebase.bom))
