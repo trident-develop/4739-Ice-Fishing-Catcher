@@ -23,13 +23,13 @@ class Show2(
 
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
-        Log.d("MYTAG", "onPageFinished: $url")
+//        Log.d("MYTAG", "onPageFinished: $url")
         onFinished?.invoke(view, url)
     }
 
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-        val url = request?.url?.toString()
-        Log.d("MYTAG", "shouldOverrideUrlLoading: $url")
+//        val url = request?.url?.toString()
+//        Log.d("MYTAG", "shouldOverrideUrlLoading: $url")
 
         val uri = request?.url ?: return false
         if (uri.scheme == "about") return false
